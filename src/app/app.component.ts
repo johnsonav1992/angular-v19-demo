@@ -5,13 +5,15 @@ import { SwapiService } from './swapi.service';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  private _swapiService = inject(SwapiService);
+    private _swapiService = inject(SwapiService);
 
-  public starships = rxResource({loader: () => this._swapiService.getAllStarships().pipe(map(res => res.results)) })
+    public starships = rxResource({
+        loader: () => this._swapiService.getAllStarships().pipe(map((res) => res.results)),
+    });
 }

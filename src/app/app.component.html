@@ -1,23 +1,21 @@
 @let columnStyles = { display: 'flex', flexDirection: 'column' };
 
 <div [style]="columnStyles">
-  @if(starships.isLoading()) {
-    <div class="spinner"></div>
-  } @else if (starships.error()) {
-    <div [style]="columnStyles">
-      <p>
-        There was an error loading the ships...
-      </p>
-      <button (click)="starships.reload()">Retry</button>
-    </div>
-  } @else {
-    @for(ship of starships.value(); track ship.name) {
-      <p>
-        {{ ship.name }}
-      </p>
-    } @empty {
-      <p>No ships to display!</p>
+    @if (starships.isLoading()) {
+        <div class="spinner"></div>
+    } @else if (starships.error()) {
+        <div [style]="columnStyles">
+            <p class="error">There was an error loading the ships...</p>
+            <button (click)="starships.reload()">Retry</button>
+        </div>
+    } @else {
+        @for (ship of starships.value(); track ship.name) {
+            <p>
+                {{ ship.name }}
+            </p>
+        } @empty {
+            <p>No ships to display!</p>
+        }
+        <button (click)="starships.reload()">Refresh</button>
     }
-    <button (click)="starships.reload()">Refresh</button>
-  }
 </div>

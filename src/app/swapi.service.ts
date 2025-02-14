@@ -3,14 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { StarshipsRes } from './types/types';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class SwapiService {
-  private _http = inject(HttpClient);
+    private _http = inject(HttpClient);
 
-  public readonly baseUrl= 'https://swapi.dev/api';
+    public readonly baseUrl = 'https://swapi.dev/api';
 
-  public getAllStarships() {
-    return this._http.get<StarshipsRes>(`${this.baseUrl}/starships`);
-  }
+    public getAllStarships() {
+        return this._http.get<StarshipsRes>(`${this.baseUrl}/starships`);
+    }
 }
