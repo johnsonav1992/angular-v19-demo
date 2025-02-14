@@ -29,17 +29,22 @@
     marginTop: '1rem',
   }"
 >
+  @let noMorePrev = !this.starships.value()?.previous;
   <button
     (click)="goToPreviousPage()"
-    [disabled]="!this.starships.value()?.previous"
-    [style.background-color]="'lightslategrey'"
+    [disabled]="noMorePrev"
+    [class.alt-button]="true"
+    [class.disabled]="noMorePrev && !starships.isLoading()"
   >
     Previous
   </button>
+
+  @let noMoreNext = !this.starships.value()?.next;
   <button
     (click)="goToNextPage()"
-    [disabled]="!this.starships.value()?.next"
-    [style.background-color]="'lightsteelblue'"
+    [disabled]="noMoreNext && !starships.isLoading()"
+    [class.alt-button]="true"
+    [class.disabled]="noMoreNext && !starships.isLoading()"
   >
     Next
   </button>

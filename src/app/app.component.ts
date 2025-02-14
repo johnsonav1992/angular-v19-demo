@@ -12,15 +12,15 @@ import { map } from 'rxjs';
 export class AppComponent {
   private _swapiService = inject(SwapiService);
 
+  public starships = rxResource({
+    loader: () => this._swapiService.getAllStarships(),
+  });
+
   // public starships = rxResource({
   //   request: () => ({ pageNum: this.starshipsPage() }),
   //   loader: ({ request: { pageNum } }) =>
   //     this._swapiService.getAllStarships(pageNum),
   // });
-
-  public starships = rxResource({
-    loader: () => this._swapiService.getAllStarships(),
-  });
 
   // public vehicles = resource({
   //   loader: () =>
