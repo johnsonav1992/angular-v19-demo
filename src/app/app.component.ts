@@ -10,15 +10,15 @@ import { SwapiService } from './swapi.service';
 export class AppComponent {
   private _swapiService = inject(SwapiService);
 
-  // public starships = rxResource({
-  //   loader: () => this._swapiService.getAllStarships()
-  // });
-
   public starships = rxResource({
-    request: () => ({ pageNum: this.starshipsPage() }),
-    loader: ({ request: { pageNum } }) =>
-      this._swapiService.getAllStarships(pageNum)
+    loader: () => this._swapiService.getAllStarships()
   });
+
+  // public starships = rxResource({
+  //   request: () => ({ pageNum: this.starshipsPage() }),
+  //   loader: ({ request: { pageNum } }) =>
+  //     this._swapiService.getAllStarships(pageNum)
+  // });
 
   // public vehicles = resource({
   //   loader: () =>
