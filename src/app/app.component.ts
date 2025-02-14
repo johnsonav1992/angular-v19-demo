@@ -32,14 +32,10 @@ export class AppComponent {
   public starshipsPage = signal(1);
 
   public goToNextPage() {
-    if (this.starships.value()?.next) {
-      this.starshipsPage.update((page) => page + 1);
-    }
+    this.starshipsPage.update((page) => page + 1);
   }
 
   public goToPreviousPage() {
-    if (this.starships.value()?.previous) {
-      this.starshipsPage.update((page) => page - 1);
-    }
+    this.starshipsPage.update((page) => page - 1);
   }
 }
