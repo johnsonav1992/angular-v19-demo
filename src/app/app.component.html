@@ -16,9 +16,7 @@
   } @else {
     @for (ship of ships; track ship.name) {
       <div class="card">
-        <p>
-          {{ ship.name }}
-        </p>
+        <p>{{ ship.name }}</p>
       </div>
     } @empty {
       <p>No ships to display!</p>
