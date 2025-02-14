@@ -29,8 +29,8 @@
   @let noMorePrev = !this.starships.value()?.previous;
   <button
     (click)="goToPreviousPage()"
-    [disabled]="noMorePrev"
-    [class.disabled]="noMorePrev && !starships.isLoading()"
+    [disabled]="noMorePrev || starships.isLoading()"
+    [class.disabled]="noMorePrev || starships.isLoading()"
   >
     Previous
   </button>
@@ -38,8 +38,8 @@
   @let noMoreNext = !this.starships.value()?.next;
   <button
     (click)="goToNextPage()"
-    [disabled]="noMoreNext && !starships.isLoading()"
-    [class.disabled]="noMoreNext && !starships.isLoading()"
+    [disabled]="noMoreNext || starships.isLoading()"
+    [class.disabled]="noMoreNext || starships.isLoading()"
   >
     Next
   </button>
