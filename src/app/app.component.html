@@ -1,39 +1,36 @@
-@let columnStyles = { display: 'flex', flexDirection: 'column' };
 @let ships = starships.value()?.results;
 
-<div [style]="columnStyles">
+<div
+  class="flex-col"
+  [style.width]="'25%'"
+  [style.height]="'100%'"
+>
   @if (starships.isLoading()) {
     <div class="spinner"></div>
   } @else if (starships.error()) {
-    <div [style]="columnStyles">
+    <div class="flex-col">
       <p class="error">There was an error loading the ships...</p>
       <button (click)="starships.reload()">Retry</button>
     </div>
   } @else {
     @for (ship of ships; track ship.name) {
-      <p>
-        {{ ship.name }}
-      </p>
+      <div class="card">
+        <p>
+          {{ ship.name }}
+        </p>
+      </div>
     } @empty {
       <p>No ships to display!</p>
     }
     <button (click)="starships.reload()">Refresh</button>
   }
 </div>
-<div
-  [style]="{
-    display: 'flex',
-    gap: '1rem',
-    paddingBlock: '.5rem',
-    borderTop: '1px solid gray',
-    marginTop: '1rem',
-  }"
->
+
+<div class="nav-container">
   @let noMorePrev = !this.starships.value()?.previous;
   <button
     (click)="goToPreviousPage()"
     [disabled]="noMorePrev"
-    [class.alt-button]="true"
     [class.disabled]="noMorePrev && !starships.isLoading()"
   >
     Previous
@@ -43,7 +40,6 @@
   <button
     (click)="goToNextPage()"
     [disabled]="noMoreNext && !starships.isLoading()"
-    [class.alt-button]="true"
     [class.disabled]="noMoreNext && !starships.isLoading()"
   >
     Next
