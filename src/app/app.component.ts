@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
+import { SwapiService } from './swapi.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +11,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-v19-demo';
+  private _swapiService = inject(SwapiService);
+
+  public starships = rxResource({loader: () => this._swapiService.getAllStarships().pipe(map(res => res.results)) })
 }
