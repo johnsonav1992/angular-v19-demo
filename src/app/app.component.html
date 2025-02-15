@@ -1,28 +1,45 @@
 @let ships = starships.value()?.results;
 
 <div class="star-wars-logo"></div>
-<div
-  class="flex-col"
-  [style.width]="'25%'"
-  [style.height]="'100%'"
->
-  @if (starships.isLoading()) {
-    <div class="spinner"></div>
-  } @else if (starships.error()) {
-    <div class="flex-col">
-      <p class="error">There was an error loading the ships...</p>
-      <button (click)="starships.reload()">Retry</button>
-    </div>
-  } @else {
-    @for (ship of ships; track ship.name) {
-      <div class="card">
-        <p>{{ ship.name }}</p>
+<div class="main-wrapper">
+  <div
+    class="flex-col"
+    [style.width]="'25%'"
+    [style.height]="'100%'"
+  >
+    @if (starships.isLoading()) {
+      <div class="spinner"></div>
+    } @else if (starships.error()) {
+      <div class="flex-col">
+        <p class="error">There was an error loading the ships...</p>
+        <button (click)="starships.reload()">Retry</button>
       </div>
-    } @empty {
-      <p>No ships to display!</p>
+    } @else {
+      @for (ship of ships; track ship.name) {
+        <div class="card">
+          <p>{{ ship.name }}</p>
+        </div>
+      } @empty {
+        <p>No ships to display!</p>
+      }
+      <button (click)="starships.reload()">Refresh</button>
     }
-    <button (click)="starships.reload()">Refresh</button>
-  }
+  </div>
+  <div class="select-wrapper">
+    <h3>Selected Ship</h3>
+    <select
+      class="input"
+      [(ngModel)]="selectedShip"
+    >
+      @for (shipOpt of selectableShips(); track shipOpt) {
+        <option [value]="shipOpt">{{ shipOpt }}</option>
+      }
+    </select>
+    <p>Selected ship state:</p>
+    <p>
+      {{ selectedShip() }}
+    </p>
+  </div>
 </div>
 
 <div class="nav-container">
